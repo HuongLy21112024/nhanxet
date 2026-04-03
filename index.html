@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Nhận Xét Học Sinh - Robotics & Programming</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Hệ thống Nhận Xét Học Sinh</h1>
+            <p>Hỗ trợ giáo viên tổng hợp nhận xét nhanh chóng, chuyên nghiệp</p>
+        </header>
+
+        <!-- Step 1: Input Names -->
+        <div id="step-1" class="card fade-in">
+            <div class="card-header">
+                <h2>Bắt đầu với danh sách học sinh</h2>
+            </div>
+            <div class="card-body">
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <label for="lesson-date" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted);">Ngày học (hiện trong nhận xét):</label>
+                    <input type="text" id="lesson-date" placeholder="Ví dụ: 02/04/2026" style="width: 100%; padding: 1rem; border-radius: var(--radius-md); border: 2px solid rgba(0,0,0,0.05); background: rgba(255,255,255,0.5); font-size: 1rem; outline: none; transition: var(--transition);">
+                </div>
+                <p>Nhập tên các học sinh cần nhận xét (mỗi người một dòng):</p>
+                <textarea id="student-names" placeholder="Vũ Đức Anh&#10;Lê Minh Kiệt&#10;Nguyễn Bảo Trâm..." rows="6"></textarea>
+                <button id="start-btn" class="primary-btn">Tiếp theo</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Evaluation Form -->
+        <div id="step-2" class="card fade-in hidden">
+            <div class="card-header">
+                <div class="student-info">
+                    <span class="label">Đang nhận xét cho:</span>
+                    <h2 id="current-student-name">...</h2>
+                </div>
+                <div class="progress-info">
+                    <span id="current-index-info">Học sinh 1/1</span>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+            <div class="card-body">
+                <form id="evaluation-form">
+                    <!-- I. NĂNG LỰC NHẬN BIẾT -->
+                    <div class="evaluation-section">
+                        <h3>I. Năng lực Nhận biết và Khám phá</h3>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="cap1" value="1" required>
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Không phân biệt được thiết bị điện tử và chi tiết lắp ráp, cần hỗ trợ nhiều.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap1" value="2">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Nhận biết được một vài thiết bị nhưng còn nhầm lẫn, cần nhắc lại nhiều.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap1" value="3">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Phân biệt đúng thiết bị điện tử và chi tiết lắp ráp, nhận diện được tên.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap1" value="4">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Ghi nhớ được chức năng cơ bản của từng thiết bị (động cơ, cảm biến).</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap1" value="5">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Hiểu chức năng và biết vận dụng sáng tạo trong thiết kế mô hình.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- II. NĂNG LỰC LẮP RÁP -->
+                    <div class="evaluation-section">
+                        <h3>II. Năng lực Lắp ráp và Tư duy Không gian</h3>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="cap2" value="1" required>
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Chưa chọn đúng chi tiết và không xác định được hướng và vị trí lắp ráp.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap2" value="2">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Chọn đúng chi tiết, nhưng chưa xác định được hướng/vị trí đúng, cần hỗ trợ thường xuyên.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap2" value="3">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Chọn đúng chi tiết, xác định đúng hướng và vị trí lắp ráp, đôi khi cần nhắc nhở.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap2" value="4">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Lắp ráp chính xác, đôi khi sai nhẹ nhưng có thể sửa lại khi được gợi ý.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap2" value="5">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Lắp ráp chính xác, có thể tự sửa sai một cách chủ động mà không cần hỗ trợ.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- III. NĂNG LỰC LẬP TRÌNH -->
+                    <div class="evaluation-section">
+                        <h3>III. Năng lực Lập trình</h3>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="cap3" value="1" required>
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Chưa kéo thả được khối lệnh, gặp nhiều khó khăn dù được hỗ trợ.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap3" value="2">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Kéo thả được nhưng vẫn còn nhầm lẫn chức năng khối lệnh, cần hướng dẫn thêm.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap3" value="3">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Biết kéo thả và dùng đúng chức năng khối lệnh, tự sửa được khi có gợi ý.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap3" value="4">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Hoàn thành ít nhất 1 nhiệm vụ, sử dụng đúng và thành thạo các khối lệnh.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap3" value="5">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Hoàn thành hết tất cả nhiệm vụ, có sự sáng tạo cao trong chương trình.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- IV. NĂNG LỰC GIAO TIẾP -->
+                    <div class="evaluation-section">
+                        <h3>IV. Năng lực Giao tiếp và Hợp tác</h3>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="cap4" value="1" required>
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Chưa chủ động giao tiếp, ngại trả lời. Chưa hợp tác trong buổi trải nghiệm.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap4" value="2">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Có tương tác với giáo viên nhưng còn thụ động, chỉ trả lời khi được hỏi.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap4" value="3">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Hợp tác với giáo viên, nhưng còn nhút nhát, chưa tự tin chia sẻ về sản phẩm.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap4" value="4">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Giao tiếp tự nhiên, sẵn sàng trao đổi và phối hợp tốt trong các hoạt động.</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="cap4" value="5">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Tự tin, hào hứng chia sẻ về mô hình. Hợp tác tuyệt vời và truyền cảm hứng.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="next-student-btn" class="primary-btn">Tiếp theo</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Step 3: Result Summary -->
+        <div id="step-3" class="card fade-in hidden">
+            <div class="card-header">
+                <h2>Tổng hợp nhận xét</h2>
+                <div class="header-actions" style="display: flex; gap: 10px;">
+                    <button id="download-excel-btn" class="primary-btn" style="background: #10b981;">Tải bản Excel (.csv)</button>
+                    <button id="copy-all-btn" class="secondary-btn">Sao chép tất cả</button>
+                </div>
+            </div>
+            <div id="results-container" class="card-body">
+                <!-- Results will be injected here -->
+            </div>
+            <div class="card-footer">
+                <button id="restart-btn" class="secondary-btn">Làm lại từ đầu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
